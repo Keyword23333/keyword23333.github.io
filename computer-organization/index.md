@@ -29,16 +29,8 @@ title: "计算机组成原理"
     <div class="course-chapters">
       <h2>课程章节</h2>
       <div class="chapter-grid">
-        {% for chapter in site.data.chapters.chapters %}
-          <div class="chapter-card">
-            <div class="chapter-number">{{ forloop.index }}</div>
-            <div class="chapter-content">
-              <h3>{{ chapter.title }}</h3>
-              <p>{{ chapter.description }}</p>
-              <a href="{{ chapter.url }}" class="chapter-btn">开始学习</a>
-            </div>
-          </div>
-        {% endfor %}
+        
+        {% include card_list.html collection=site.data.chapters.chapters %}
       </div>
     </div>
 
