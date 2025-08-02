@@ -4,8 +4,8 @@ title: "计算机组成原理"
 ---
 
 <div class="course-homepage">
-  <header class="course-header">
-    <h1>{{ site.data.chapters.course_info.subtitle }}</h1>
+  <header>
+    <h1>{{ page.title }}</h1>
     <p class="course-subtitle">{{ site.data.chapters.course_info.subtitle }}</p>
     <p class="course-description">{{ site.data.chapters.course_info.description }}</p>
   </header>
