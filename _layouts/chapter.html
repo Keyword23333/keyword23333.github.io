@@ -1,0 +1,312 @@
+---
+layout: default
+---
+
+<div class="chapter-container">
+  <!-- 章节导航栏 -->
+  <nav class="chapter-nav">
+    <div class="chapter-nav-header">
+      <h2>{{ site.data.chapters.course_info.title }}</h2>
+      <p>{{ site.data.chapters.course_info.subtitle }}</p>
+    </div>
+    
+    <div class="chapter-list">
+      {% for chapter in site.data.chapters.chapters %}
+        <a href="{{ chapter.url }}" 
+           class="chapter-link {% if page.url == chapter.url %}active{% endif %}"
+           title="{{ chapter.description }}">
+          {{ chapter.title }}
+        </a>
+      {% endfor %}
+    </div>
+  </nav>
+
+  <!-- 章节内容 -->
+  <main class="chapter-content">
+    <header class="chapter-header">
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}
+        <p class="chapter-description">{{ page.description }}</p>
+      {% endif %}
+    </header>
+
+    <article class="chapter-article">
+      {{ content }}
+    </article>
+
+    <!-- 分页导航 -->
+    <nav class="chapter-pagination">
+      {% assign current_index = 0 %}
+      {% for chapter in site.data.chapters.chapters %}
+        {% if page.url == chapter.url %}
+          {% assign current_index = forloop.index0 %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+      <div class="pagination-buttons">
+        {% if current_index > 0 %}
+          {% assign prev_chapter = site.data.chapters.chapters[current_index | minus: 1] %}
+          <a href="{{ prev_chapter.url }}" class="pagination-btn prev-btn">
+            ← {{ prev_chapter.title }}
+          </a>
+        {% endif %}
+
+        <span class="pagination-info">
+          第 {{ current_index | plus: 1 }} 章 / 共 {{ site.data.chapters.chapters.size }} 章
+        </span>
+
+        {% if current_index < site.data.chapters.chapters.size | minus: 1 %}
+          {% assign next_chapter = site.data.chapters.chapters[current_index | plus: 1] %}
+          <a href="{{ next_chapter.url }}" class="pagination-btn next-btn">
+            {{ next_chapter.title }} →
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="pagination-progress">
+        <div class="progress-bar">
+          <div class="progress-fill progress-width-{{ current_index | plus: 1 | times: 100.0 | divided_by: site.data.chapters.chapters.size | round }}"></div>
+        </div>
+        <span class="progress-text">学习进度: {{ current_index | plus: 1 }}/{{ site.data.chapters.chapters.size }}</span>
+      </div>
+    </nav>
+  </main>
+</div>
+
+<style>
+.chapter-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 30px;
+  min-height: 100vh;
+}
+
+.chapter-nav {
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.chapter-nav-header h2 {
+  margin: 0 0 5px 0;
+  color: var(--headings);
+  font-size: 1.2em;
+}
+
+.chapter-nav-header p {
+  margin: 0 0 20px 0;
+  color: var(--text-secondary);
+  font-size: 0.9em;
+}
+
+.chapter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chapter-link {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: var(--text);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.chapter-link:hover {
+  background: var(--links);
+  color: white;
+  transform: translateX(5px);
+}
+
+.chapter-link.active {
+  background: var(--links);
+  color: white;
+  font-weight: bold;
+}
+
+.chapter-content {
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.chapter-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--bg-secondary);
+}
+
+.chapter-header h1 {
+  margin: 0 0 10px 0;
+  color: var(--headings);
+  font-size: 2em;
+}
+
+.chapter-description {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 1.1em;
+}
+
+.chapter-article {
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.chapter-article h1, .chapter-article h2, .chapter-article h3, 
+.chapter-article h4, .chapter-article h5, .chapter-article h6 {
+  color: var(--headings);
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.chapter-article p {
+  margin-bottom: 15px;
+}
+
+.chapter-article ul, .chapter-article ol {
+  margin-bottom: 15px;
+  padding-left: 20px;
+}
+
+.chapter-article li {
+  margin-bottom: 5px;
+}
+
+.chapter-article code {
+  background: var(--bg-secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+}
+
+.chapter-article pre {
+  background: var(--bg-secondary);
+  padding: 15px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.chapter-pagination {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 2px solid var(--bg-secondary);
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.pagination-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  max-width: 200px;
+  text-align: center;
+}
+
+.pagination-btn:hover {
+  background: var(--links);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.prev-btn {
+  text-align: left;
+}
+
+.next-btn {
+  text-align: right;
+}
+
+.pagination-info {
+  color: var(--text-secondary);
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.pagination-progress {
+  margin-top: 20px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--links);
+  transition: width 0.3s ease;
+}
+
+/* Progress width classes */
+.progress-width-14 { width: 14%; }
+.progress-width-28 { width: 28%; }
+.progress-width-42 { width: 42%; }
+.progress-width-57 { width: 57%; }
+.progress-width-71 { width: 71%; }
+.progress-width-85 { width: 85%; }
+.progress-width-100 { width: 100%; }
+
+.progress-text {
+  color: var(--text-secondary);
+  font-size: 0.9em;
+  text-align: center;
+  display: block;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .chapter-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .chapter-nav {
+    position: static;
+    order: 2;
+  }
+  
+  .chapter-content {
+    order: 1;
+  }
+  
+  .pagination-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .pagination-btn {
+    max-width: none;
+  }
+}
+</style> 

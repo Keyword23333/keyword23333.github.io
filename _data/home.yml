@@ -5,13 +5,16 @@ navbar_entries:
   - title: blog
     url: blog
 
+  - title: 计算机组成原理
+    url: computer-organization
+
   - title: website
     url: https://www.abhinav.co
 
 project_entries:
   - title: hadoop
     url: https://github.com/Keyword23333/hadoop
-    desc: This is an example project, configured in _data/home.yml
+    desc: BIT 3rd semester project, configured in _data/home.yml
     highlight: NEW
 
   - title: Project 2

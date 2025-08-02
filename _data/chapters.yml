@@ -1,0 +1,41 @@
+chapters:
+  - title: "第一章 计算机系统概论"
+    filename: "1.md"
+    url: "/computer-organization/chapter-1/"
+    description: "计算机的演变、层次结构、性能指标"
+    
+  - title: "第二章 数据的机器级表示"
+    filename: "2.md"
+    url: "/computer-organization/chapter-2/"
+    description: "数制与编码、逻辑门"
+    
+  - title: "第三章 运算方法和运算器"
+    filename: "3.md"
+    url: "/computer-organization/chapter-3/"
+    description: "定点数运算、浮点数运算"
+    
+  - title: "第四章 存储系统"
+    filename: "4.md"
+    url: "/computer-organization/chapter-4/"
+    description: "主存储器、高速缓存、虚拟存储器"
+    
+  - title: "第五章 指令系统"
+    filename: "5.md"
+    url: "/computer-organization/chapter-5/"
+    description: "指令格式、寻址方式、指令类型"
+    
+  - title: "第六章 中央处理器"
+    filename: "6.md"
+    url: "/computer-organization/chapter-6/"
+    description: "CPU结构、指令周期、控制单元"
+    
+  - title: "第七章 总线系统"
+    filename: "7.md"
+    url: "/computer-organization/chapter-7/"
+    description: "总线结构、总线仲裁、总线标准"
+
+course_info:
+  title: "计算机组成原理"
+  subtitle: "Computer Organization and Architecture"
+  description: "深入理解计算机硬件系统的工作原理"
+  total_chapters: 7 
