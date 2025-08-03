@@ -28,8 +28,7 @@ title: "计算机组成原理"
 
     <div class="course-chapters">
       <h2>课程章节</h2>
-      <div class="chapter-grid">
-        
+      <div class="chapter-grid">   
         {% include card_list.html collection=site.data.chapters.chapters %}
       </div>
     </div>
